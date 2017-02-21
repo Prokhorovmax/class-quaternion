@@ -112,10 +112,10 @@ public final class Quaternion {
         long cLong = Double.valueOf(c).longValue();
         long dLong = Double.valueOf(d).longValue();
         long longResult = aLong;
-        longResult = 11 * longResult + bLong;
-        longResult = 17 * longResult + cLong;
+        longResult = 31 * longResult + bLong;
+        longResult = 31 * longResult + cLong;
         longResult = 31 * longResult + dLong;
-        int result = (int) (long) longResult;
+        int result = (int)  longResult;
         return result;
     }
     // return this.toString().hashCode();

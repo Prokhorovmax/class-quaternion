@@ -14,7 +14,9 @@ public class QuaternionTest {
 
     @Test
     public void module() throws Exception {
-
+        assertEquals(1.0, new Quaternion(1.0, 0.0, 0.0, 0.0).module(), 1.0e-5);
+        assertEquals(2.0, new Quaternion(1.0, 1.0, 1.0, 1.0).module(), 1.0e-5);
+        assertEquals(19.952, new Quaternion(1.25, 15.0, 3.33, 12.666).module(), 1.0e-3);
     }
 
     @Test
