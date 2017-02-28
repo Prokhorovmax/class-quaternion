@@ -99,8 +99,8 @@ public final class Quaternion {
         if (this == obj) return true;
         if (obj instanceof Quaternion) {
             Quaternion other = (Quaternion) obj;
-            return (Math.abs(a - other.a) < 1.0e-5) && (Math.abs(b - other.b) < 1.0e-5) &&
-                    (Math.abs(c - other.c) < 1.0e-5) && (Math.abs(d - other.d) < 1.0e-5);
+            return (Math.abs(a - other.a) < 1.0e-3) && (Math.abs(b - other.b) < 1.0e-3) &&
+                    (Math.abs(c - other.c) < 1.0e-3) && (Math.abs(d - other.d) < 1.0e-3);
         }
         return false;
     }
@@ -115,7 +115,7 @@ public final class Quaternion {
         longResult = 31 * longResult + bLong;
         longResult = 31 * longResult + cLong;
         longResult = 31 * longResult + dLong;
-        int result = (int)  longResult;
+        int result = (int) longResult;
         return result;
     }
     // return this.toString().hashCode();
@@ -123,5 +123,9 @@ public final class Quaternion {
     @Override
     public String toString() {
         return String.format("%-8.4f%-2s%-8.4f%-4s%-8.4f%-4s%-8.4f%-1s", a, "+", b, "i +", c, "j +", d, "k");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Quaternion(32.9985, 1993.3294, 1482.8494, -1916.6755));
     }
 }
