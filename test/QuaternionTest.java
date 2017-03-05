@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 
 public class QuaternionTest {
 
-    Quaternion q1 = new Quaternion(1.0, 1.0, 1.0, 1.0);
-    Quaternion q2 = new Quaternion(0.005, 1.73, 3.33, 123.123);
-    Quaternion q3 = new Quaternion(-15.0, 12.45, -16.4, 0.0);
+    private Quaternion q1 = new Quaternion(1.0, 1.0, 1.0, 1.0);
+    private Quaternion q2 = new Quaternion(0.005, 1.73, 3.33, 123.123);
+    private Quaternion q3 = new Quaternion(-15.0, 12.45, -16.4, 0.0);
 
     @Test
     public void norm() throws Exception {
@@ -65,33 +65,44 @@ public class QuaternionTest {
 
     @Test
     public void inv() throws Exception {
-
+        assertEquals(new Quaternion(0.25, -0.25, -0.25, -0.25), q1.inv());
+        assertEquals(new Quaternion(0.0, -0.0001, -0.0002, -0.0081), q2.inv());
+        assertEquals(new Quaternion(-0.0231, -0.0192, 0.0253, 0.0), q3.inv());
     }
 
     @Test
     public void getScalarPart() throws Exception {
-
+        assertEquals(new Quaternion(1.0, 0.0, 0.0, 0.0), q1.getScalarPart());
+        assertEquals(new Quaternion(0.005, 0.0, 0.0, 0.0), q2.getScalarPart());
+        assertEquals(new Quaternion(-15.0, 0.0, 0.0, 0.0), q3.getScalarPart());
     }
 
     @Test
     public void getVectorPart() throws Exception {
-
+        assertEquals(new Quaternion(0.0, 1.0, 1.0, 1.0), q1.getVectorPart());
+        assertEquals(new Quaternion(0.0, 1.73, 3.33, 123.123), q2.getVectorPart());
+        assertEquals(new Quaternion(0.0, 12.45, -16.4, 0.0), q3.getVectorPart());
     }
 
     @Test
-    public void createFromAxisAndAngle() throws Exception {
-
+    public void setFromAxisAndAngle() throws Exception {
+        assertEquals(new Quaternion(0.0, 0.0, 0.0, 0.0), Quaternion.setFromAxisAndAngle(new Vector(0.0, 0.0, 0.0), 0.0));
+        assertEquals(new Quaternion(90.0, 2.0, 3.0, 10.0), Quaternion.setFromAxisAndAngle(new Vector(2.0, 3.0, 10.0), 90.0));
+        assertEquals(new Quaternion(150.0, 1.0, 123.321, 77.77), Quaternion.setFromAxisAndAngle(new Vector(1.0, 123.321, 77.77), 150.0));
+        assertEquals(new Quaternion(30.0, 5.0, -5.0, 5.0), Quaternion.setFromAxisAndAngle(new Vector(5.0, -5.0, 5.0), 30.0));
     }
 
     @Test
     public void getAxis() throws Exception {
-
+        assertEquals(new Vector(1.0, 1.0, 1.0), q1.getAxis());
+        assertEquals(new Vector(1.73, 3.33, 123.123), q2.getAxis());
+        assertEquals(new Vector(12.45, -16.4, 0.0), q3.getAxis());
     }
 
     @Test
     public void getAngle() throws Exception {
-
+        assertEquals(1.0, q1.getAngle(), 1.0e-5);
+        assertEquals(0.005, q2.getAngle(), 1.0e-5);
+        assertEquals(-15.0, q3.getAngle(), 1.0e-5);
     }
-
-
 }

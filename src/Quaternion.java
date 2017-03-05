@@ -7,7 +7,7 @@ public final class Quaternion {
     private final double c;
     private final double d;
 
-    // creating new quaternion
+    // [Constructor] creating new quaternion from components
     public Quaternion(double a, double b, double c, double d) {
         this.a = a;
         this.b = b;
@@ -70,27 +70,23 @@ public final class Quaternion {
         return new Quaternion(0.0, b, c, d);
     }
 
-    // creating quaternion from given axis ang angle
-    public static Quaternion createFromAxisAndAngle(Vector axis, double angle) {
-        double w = Math.cos(angle / 2);
-        double i = axis.x * Math.sin(angle / 2);
-        double j = axis.y * Math.sin(angle / 2);
-        double k = axis.z * Math.sin(angle / 2);
+    // [Constructor] creating quaternion from given axis ang angle in degrees
+    public static Quaternion setFromAxisAndAngle(Vector axis, double angle) {
+        double w = angle;
+        double i = axis.x;
+        double j = axis.y;
+        double k = axis.z;
         return new Quaternion(w, i, j, k);
     }
 
     // returning the axis from given quaternion
     public Vector getAxis() {
-        double anglePart = Math.sin(Math.acos(a));
-        double x = b / anglePart;
-        double y = c / anglePart;
-        double z = d / anglePart;
-        return new Vector(x, y, z);
+        return new Vector(b, c, d);
     }
 
     // returning the angle from given quaternion
     public double getAngle() {
-        return 2 * Math.acos(a);
+        return a;
     }
 
     // overrides
@@ -123,9 +119,5 @@ public final class Quaternion {
     @Override
     public String toString() {
         return String.format("%-8.4f%-2s%-8.4f%-4s%-8.4f%-4s%-8.4f%-1s", a, "+", b, "i +", c, "j +", d, "k");
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Quaternion(32.9985, 1993.3294, 1482.8494, -1916.6755));
     }
 }

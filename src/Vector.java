@@ -22,8 +22,8 @@ public final class Vector {
         if (this == obj) return true;
         if (obj instanceof Vector) {
             Vector other = (Vector) obj;
-            return (Math.abs(x - other.x) < 1.0e-5) && (Math.abs(y - other.y) < 1.0e-5) &&
-                    (Math.abs(z - other.z) < 1.0e-5);
+            return (Math.abs(x - other.x) < 1.0e-3) && (Math.abs(y - other.y) < 1.0e-3) &&
+                    (Math.abs(z - other.z) < 1.0e-3);
         }
         return false;
     }
