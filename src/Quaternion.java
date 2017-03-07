@@ -8,7 +8,7 @@ public final class Quaternion {
     private final double d;
 
     // [Constructor] creating new quaternion from components
-    public Quaternion(double a, double b, double c, double d) {
+    public Quaternion(final double a, final double b, final double c, final double d) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -41,22 +41,22 @@ public final class Quaternion {
     }
 
     // multiplication by a scalar
-    public Quaternion scalarMultiply(double constant) {
+    public Quaternion scalarMultiply(final double constant) {
         return new Quaternion(a * constant, b * constant, c * constant, d * constant);
     }
 
     // returning multiplication of two quiaternions
     public Quaternion multiply(Quaternion other) {
-        double a1 = a * other.a - b * other.b - c * other.c - d * other.d;
-        double b1 = a * other.b + b * other.a + c * other.d - d * other.c;
-        double c1 = a * other.c - b * other.d + c * other.a + d * other.b;
-        double d1 = a * other.d + b * other.c - c * other.b + d * other.a;
+        final double a1 = a * other.a - b * other.b - c * other.c - d * other.d;
+        final double b1 = a * other.b + b * other.a + c * other.d - d * other.c;
+        final double c1 = a * other.c - b * other.d + c * other.a + d * other.b;
+        final double d1 = a * other.d + b * other.c - c * other.b + d * other.a;
         return new Quaternion(a1, b1, c1, d1);
     }
 
     // returning the inversion of this quaternion
     public Quaternion inv() {
-        double denominator = norm();
+        final double denominator = norm();
         return new Quaternion(a / denominator, -b / denominator, -c / denominator, -d / denominator);
     }
 
@@ -71,11 +71,11 @@ public final class Quaternion {
     }
 
     // [Constructor] creating quaternion from given axis ang angle in degrees
-    public static Quaternion setFromAxisAndAngle(Vector axis, double angle) {
-        double w = angle;
-        double i = axis.x;
-        double j = axis.y;
-        double k = axis.z;
+    public static Quaternion setFromAxisAndAngle(final Vector axis, final double angle) {
+        final double w = angle;
+        final double i = axis.getX();
+        final double j = axis.getY();
+        final double k = axis.getZ();
         return new Quaternion(w, i, j, k);
     }
 
@@ -94,7 +94,7 @@ public final class Quaternion {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj instanceof Quaternion) {
-            Quaternion other = (Quaternion) obj;
+            final Quaternion other = (Quaternion) obj;
             return (Math.abs(a - other.a) < 1.0e-3) && (Math.abs(b - other.b) < 1.0e-3) &&
                     (Math.abs(c - other.c) < 1.0e-3) && (Math.abs(d - other.d) < 1.0e-3);
         }
@@ -103,18 +103,17 @@ public final class Quaternion {
 
     @Override
     public int hashCode() {
-        long aLong = Double.valueOf(a).longValue();
-        long bLong = Double.valueOf(b).longValue();
-        long cLong = Double.valueOf(c).longValue();
-        long dLong = Double.valueOf(d).longValue();
-        long longResult = aLong;
+        final long aLong = Double.valueOf(a).longValue();
+        final long bLong = Double.valueOf(b).longValue();
+        final long cLong = Double.valueOf(c).longValue();
+        final long dLong = Double.valueOf(d).longValue();
+        long longResult = 17;
+        longResult = 31 * longResult + aLong;
         longResult = 31 * longResult + bLong;
         longResult = 31 * longResult + cLong;
         longResult = 31 * longResult + dLong;
-        int result = (int) longResult;
-        return result;
+        return (int) longResult;
     }
-    // return this.toString().hashCode();
 
     @Override
     public String toString() {
